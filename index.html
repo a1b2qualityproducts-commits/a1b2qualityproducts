@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPristine AQUA - Premium Hydration</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Modern Fonts: 'Outfit' for Headings, 'Inter' for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom Config for Brand Colors & Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#22d3ee', // Cyan-400
+                            DEFAULT: '#0891b2', // Cyan-600
+                            dark: '#164e63', // Cyan-900
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* Glass Effect Utility - UPDATED: Less transparent (0.95) for better readability */
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Slide Animation for Cart */
+        .slide-in-right {
+            animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans selection:bg-brand-light selection:text-white overflow-x-hidden pb-24">
+
+    <!-- Ambient Background Gradients -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute -top-[10%] -right-[10%] w-[50%] h-[50%] bg-cyan-200/30 rounded-full blur-[120px]"></div>
+        <div class="absolute top-[40%] -left-[10%] w-[40%] h-[40%] bg-blue-200/30 rounded-full blur-[100px]"></div>
+        <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=1920" 
+             class="absolute inset-0 w-full h-full object-cover opacity-[0.03] mix-blend-multiply" alt="Texture">
+    </div>
+
+    <!-- Modern Floating Navbar -->
+    <nav id="main-nav" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="glass mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-0 sm:mt-4 rounded-b-2xl sm:rounded-2xl shadow-sm border-b sm:border border-white/40">
+            <div class="flex justify-between items-center h-24">
+                <!-- Brand Logo -->
+                <div class="flex items-center space-x-3 group cursor-pointer">
+                    <div class="relative w-14 h-14 flex items-center justify-center transition-transform duration-500 group-hover:rotate-12">
+                        <img src="https://i.postimg.cc/y6GjWBqC/logo.png" onerror="this.style.display='none'; document.getElementById('fallback-icon').style.display='flex'" 
+                             class="w-full h-full object-contain drop-shadow-md" alt="Logo">
+                        <div id="fallback-icon" class="hidden absolute inset-0 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-full text-white shadow-lg items-center justify-center">
+                            <i data-lucide="droplets" class="w-7 h-7"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <h1 class="font-display text-2xl font-black tracking-tight text-slate-800 leading-none">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700">SP</span>
+                            <span class="text-slate-800 ml-1">AQUA</span>
+                        </h1>
+                        <span class="text-[10px] font-bold tracking-[0.2em] text-cyan-600 uppercase mt-1">A1B2 Quality Products</span>
+                    </div>
+                </div>
+
+                <!-- Contact & Cart Actions -->
+                <div class="flex items-center gap-3 md:gap-6">
+                    <!-- Phone Numbers -->
+                    <div class="flex flex-col items-end mr-1 md:mr-0">
+                        <a href="tel:+918148038458" class="group flex items-center gap-1 md:gap-2 font-display font-extrabold text-sm md:text-xl text-slate-800 hover:text-cyan-600 transition-colors">
+                            <span>+91 81480 38458</span>
+                            <span class="hidden md:inline-flex bg-cyan-100 p-1.5 rounded-full text-cyan-600 group-hover:bg-cyan-600 group-hover:text-white transition-all">
+                                <i data-lucide="phone" class="w-5 h-5"></i>
+                            </span>
+                        </a>
+                        <a href="tel:+919943955622" class="hidden md:flex text-lg font-bold text-slate-600 hover:text-cyan-600 transition-colors mt-0.5 items-center gap-1">
+                            <span>+91 99439 55622</span>
+                        </a>
+                    </div>
+                    
+                    <button onclick="toggleCart()" class="relative group bg-slate-900 hover:bg-cyan-600 text-white p-3 md:p-4 rounded-xl md:rounded-2xl transition-all duration-300 shadow-lg shadow-slate-900/20 hover:shadow-cyan-500/30 active:scale-95">
+                        <i data-lucide="shopping-bag" class="w-6 h-6 md:w-10 md:h-10"></i>
+                        <span id="cart-badge" class="absolute -top-2 -right-2 w-5 h-5 md:w-7 md:h-7 bg-red-500 text-white text-[10px] md:text-xs font-bold flex items-center justify-center rounded-full border-2 border-white shadow-sm hidden transition-all scale-0">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- WRAPPER FOR MAIN CONTENT -->
+    <div id="main-content" class="transition-all duration-300 w-full relative">
+
+        <!-- Hero Section -->
+        <header class="relative z-10 pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 overflow-hidden">
+            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                <!-- Text Content -->
+                <div class="flex-1 text-center lg:text-left space-y-8 animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <!-- Trust Badges -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+                        <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 border border-white backdrop-blur-sm shadow-sm text-xs font-bold text-slate-600 uppercase tracking-wider hover:bg-white transition-colors cursor-default">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-green-500"></i> ISO 9001:2015
+                        </div>
+                        <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 border border-white backdrop-blur-sm shadow-sm text-xs font-bold text-slate-600 uppercase tracking-wider hover:bg-white transition-colors cursor-default">
+                            <i data-lucide="leaf" class="w-4 h-4 text-emerald-500"></i> ISO 14001:2015
+                        </div>
+                        <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 border border-white backdrop-blur-sm shadow-sm text-xs font-bold text-slate-600 uppercase tracking-wider hover:bg-white transition-colors cursor-default">
+                            <i data-lucide="award" class="w-4 h-4 text-yellow-500"></i> FSSAI Licensed
+                        </div>
+                    </div>
+
+                    <h2 class="font-display font-extrabold text-5xl lg:text-7xl text-slate-900 leading-[1.1] tracking-tight">
+                        Trust in Every <br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 relative inline-block">
+                            Crystal Drop.
+                            <svg class="absolute w-full h-3 -bottom-1 left-0 text-cyan-200 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" /></svg>
+                        </span>
+                    </h2>
+                    
+                    <p class="text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                        Premium hydration scrutinized for purity and delivered fresh to your doorstep in <strong class="text-slate-900 font-semibold">Tiruppur</strong> within 12 hours.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 pt-4 text-sm font-medium text-slate-500">
+                        <div class="flex items-center gap-3">
+                            <div class="p-2 bg-cyan-100 rounded-lg text-cyan-700"><i data-lucide="truck" class="w-5 h-5"></i></div>
+                            <span>Express 12hr Delivery</span>
+                        </div>
+                        <div class="h-8 w-px bg-slate-200 hidden sm:block"></div>
+                        <div class="flex items-center gap-3">
+                            <div class="p-2 bg-cyan-100 rounded-lg text-cyan-700"><i data-lucide="map-pin" class="w-5 h-5"></i></div>
+                            <span>Tiruppur - 641652</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="flex-1 relative animate-fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-b from-cyan-100/50 to-white/0 rounded-full blur-3xl -z-10 animate-pulse-slow"></div>
+                    <div class="relative group perspective-1000">
+                        <img src="https://github.com/pavithranr2025e-png/imagea1b2/blob/main/top1.png?raw=true" 
+                             class="relative w-full max-w-lg mx-auto rounded-[3rem] shadow-2xl shadow-cyan-900/10 transform transition-transform duration-700 hover:rotate-2 hover:scale-[1.02] border-4 border-white" 
+                             alt="Pure Water">
+                        <div class="absolute -bottom-6 -right-6 lg:right-10 bg-white p-4 rounded-2xl shadow-xl shadow-slate-200/50 flex items-center gap-3 border border-slate-50 animate-float">
+                            <div class="bg-green-100 p-3 rounded-xl text-green-600"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
+                            <div>
+                                <div class="text-xs text-slate-400 font-bold uppercase tracking-wider">Quality</div>
+                                <div class="font-display font-bold text-slate-800">100% Verified</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Product Showcase -->
+        <section class="relative z-10 py-24 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 space-y-4">
+                    <span class="text-cyan-600 font-bold tracking-widest uppercase text-sm">Our Collection</span>
+                    <h3 class="font-display font-bold text-4xl text-slate-900">Choose Your Hydration</h3>
+                    <div class="w-24 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full"></div>
+                </div>
+
+                <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
+                    <!-- Products injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action (Modern Technologized Button) -->
+        <section class="relative z-10 py-28 px-4 overflow-hidden bg-slate-50">
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <div class="group cursor-pointer inline-block perspective-500" onclick="openCart()">
+                    <div class="relative transform transition-transform duration-300 group-hover:scale-105">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl blur opacity-20 group-hover:opacity-80 transition duration-500"></div>
+                        <button class="relative w-full bg-slate-900 rounded-xl px-12 py-8 border border-slate-700 group-hover:border-cyan-500/80 flex items-center justify-center gap-8 overflow-hidden shadow-2xl">
+                            <div class="absolute inset-0 opacity-10 bg-[linear-gradient(90deg,rgba(34,211,238,0.5)_1px,transparent_1px),linear-gradient(180deg,rgba(34,211,238,0.5)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
+                            <span class="relative font-display font-black text-3xl md:text-5xl tracking-[0.15em] text-white uppercase z-10 group-hover:text-cyan-400 transition-colors drop-shadow-lg">ORDER NOW</span>
+                            <div class="relative z-10 flex items-center justify-center w-14 h-14 border border-cyan-500/30 rounded bg-slate-800/80 group-hover:bg-cyan-500 group-hover:border-cyan-400 group-hover:text-slate-900 text-cyan-400 transition-all duration-300 shadow-[0_0_15px_rgba(6,182,212,0.2)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.6)]"><i data-lucide="arrow-right" class="w-8 h-8"></i></div>
+                        </button>
+                    </div>
+                </div>
+                <p class="mt-8 text-slate-400 font-medium tracking-widest uppercase text-[10px] flex items-center justify-center gap-2">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    System Online • Instant WhatsApp Checkout
+                </p>
+            </div>
+        </section>
+
+        <!-- AI Tools Section -->
+        <section class="relative z-10 py-16 px-4 bg-slate-50">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8">
+                <!-- Gemini AI Hydration Coach -->
+                <div class="glass rounded-3xl p-8 md:p-10 shadow-xl relative overflow-hidden border border-white/50 hover:shadow-2xl transition-all duration-500 group">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-cyan-400/10 rounded-full blur-[60px] -z-10 group-hover:bg-cyan-400/20 transition-colors"></div>
+                    <div class="mb-8">
+                        <span class="text-cyan-600 font-bold tracking-widest uppercase text-xs flex items-center gap-2 mb-2"><i data-lucide="sparkles" class="w-3 h-3"></i> Smart Tool</span>
+                        <h3 class="font-display font-bold text-2xl md:text-3xl text-slate-900">Personal Hydration Coach</h3>
+                        <p class="text-slate-500 text-sm mt-2">Enter your stats to get a personalized water intake plan tailored for you.</p>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">Weight (kg)</label>
+                                <div class="relative"><i data-lucide="scale" class="absolute left-3 top-3.5 w-4 h-4 text-slate-400"></i><input type="number" id="ai-weight" placeholder="e.g. 70" class="w-full pl-10 p-3 bg-white/80 rounded-xl border border-slate-200 focus:ring-2 focus:ring-cyan-500 outline-none transition-all text-sm"></div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">Activity</label>
+                                <div class="relative"><i data-lucide="activity" class="absolute left-3 top-3.5 w-4 h-4 text-slate-400"></i><select id="ai-activity" class="w-full pl-10 p-3 bg-white/80 rounded-xl border border-slate-200 focus:ring-2 focus:ring-cyan-500 outline-none transition-all appearance-none cursor-pointer text-sm"><option value="sedentary">Sedentary</option><option value="moderate">Moderate</option><option value="active">Active</option><option value="athlete">Athlete</option></select></div>
+                            </div>
+                        </div>
+                        <button onclick="calculateHydration()" class="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold rounded-xl shadow-lg hover:shadow-cyan-500/40 transition-all transform hover:scale-[1.02] flex justify-center items-center gap-2 text-sm"><span>Generate My Plan</span><i data-lucide="zap" class="w-4 h-4"></i></button>
+                        <div class="bg-white/60 p-5 rounded-2xl border border-white min-h-[160px] flex flex-col justify-center relative shadow-inner">
+                            <div id="ai-loading" class="hidden absolute inset-0 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-2xl z-10 flex-col gap-2"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-600"></div><span class="text-xs font-medium text-cyan-700 animate-pulse">Consulting Expert...</span></div>
+                            <div id="ai-result" class="text-slate-700 leading-relaxed text-sm"><div class="flex flex-col items-center justify-center h-full text-center opacity-50 gap-2"><i data-lucide="brain-circuit" class="w-8 h-8 text-slate-400"></i><p class="text-xs">Results will appear here.</p></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Gemini AI Event Planner -->
+                <div class="glass rounded-3xl p-8 md:p-10 shadow-xl relative overflow-hidden border border-white/50 hover:shadow-2xl transition-all duration-500 group">
+                    <div class="absolute bottom-0 left-0 w-48 h-48 bg-indigo-400/10 rounded-full blur-[60px] -z-10 group-hover:bg-indigo-400/20 transition-colors"></div>
+                    <div class="mb-8">
+                        <span class="text-indigo-600 font-bold tracking-widest uppercase text-xs flex items-center gap-2 mb-2"><i data-lucide="party-popper" class="w-3 h-3"></i> Event Assistant</span>
+                        <h3 class="font-display font-bold text-2xl md:text-3xl text-slate-900">Smart Event Planner</h3>
+                        <p class="text-slate-500 text-sm mt-2">Hosting a wedding or party? Calculate the perfect water supply instantly.</p>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">Event Type</label>
+                            <div class="relative"><i data-lucide="calendar" class="absolute left-3 top-3.5 w-4 h-4 text-slate-400"></i><input type="text" id="event-type" placeholder="e.g. Wedding, Birthday" class="w-full pl-10 p-3 bg-white/80 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-sm"></div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="col-span-1"><label class="block text-xs font-bold text-slate-700 mb-2 uppercase">Guests</label><input type="number" id="event-guests" placeholder="50" class="w-full p-3 bg-white/80 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-sm text-center"></div>
+                            <div class="col-span-1"><label class="block text-xs font-bold text-slate-700 mb-2 uppercase">Hrs</label><input type="number" id="event-duration" placeholder="4" class="w-full p-3 bg-white/80 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-sm text-center"></div>
+                            <div class="col-span-1"><label class="block text-xs font-bold text-slate-700 mb-2 uppercase">Setting</label><select id="event-setting" class="w-full p-3 bg-white/80 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-sm appearance-none"><option value="Indoor">Indoor</option><option value="Outdoor">Outdoor</option></select></div>
+                        </div>
+                        <button onclick="calculateEventNeeds()" class="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg hover:shadow-indigo-500/40 transition-all transform hover:scale-[1.02] flex justify-center items-center gap-2 text-sm"><span>Calculate Supply</span><i data-lucide="sparkles" class="w-4 h-4"></i></button>
+                        <div class="bg-white/60 p-5 rounded-2xl border border-white min-h-[160px] flex flex-col justify-center relative shadow-inner">
+                            <div id="event-loading" class="hidden absolute inset-0 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-2xl z-10 flex-col gap-2"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div><span class="text-xs font-medium text-indigo-700 animate-pulse">Analyzing...</span></div>
+                            <div id="event-result" class="text-slate-700 leading-relaxed text-sm"><div class="flex flex-col items-center justify-center h-full text-center opacity-50 gap-2"><i data-lucide="clipboard-list" class="w-8 h-8 text-slate-400"></i><p class="text-xs">Estimate will appear here.</p></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="py-16 bg-white border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4">
+                <h4 class="text-center font-display font-bold text-slate-900 text-2xl mb-12 opacity-80">Certified Excellence</h4>
+                <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-80 hover:opacity-100 transition-opacity duration-500">
+                    <div class="group flex flex-col items-center gap-4">
+                        <div class="w-32 h-32 flex items-center justify-center bg-white rounded-2xl border border-slate-100 shadow-sm group-hover:shadow-lg group-hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+                            <img src="https://i.postimg.cc/XqRMVBfL/download3.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" alt="ISO 9001" class="w-full h-full object-contain p-4 mix-blend-multiply">
+                            <div class="hidden w-full h-full items-center justify-center text-slate-300"><i data-lucide="shield-check" class="w-12 h-12"></i></div>
+                        </div>
+                        <div class="text-center"><div class="font-bold text-slate-800">ISO 9001:2015</div><div class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Quality Mgmt</div></div>
+                    </div>
+                    <div class="group flex flex-col items-center gap-4">
+                        <div class="w-32 h-32 flex items-center justify-center bg-white rounded-2xl border border-slate-100 shadow-sm group-hover:shadow-lg group-hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+                            <img src="https://i.postimg.cc/yxMqV3mT/download1.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" alt="ISO 14001" class="w-full h-full object-contain p-4 mix-blend-multiply">
+                            <div class="hidden w-full h-full items-center justify-center text-slate-300"><i data-lucide="leaf" class="w-12 h-12"></i></div>
+                        </div>
+                        <div class="text-center"><div class="font-bold text-slate-800">ISO 14001:2015</div><div class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Eco Standards</div></div>
+                    </div>
+                    <div class="group flex flex-col items-center gap-4">
+                        <div class="w-32 h-32 flex items-center justify-center bg-white rounded-2xl border border-slate-100 shadow-sm group-hover:shadow-lg group-hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+                            <img src="https://github.com/pavithranr2025e-png/imagea1b2/blob/main/download2.png?raw=true" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" alt="FSSAI" class="w-full h-full object-contain p-2 mix-blend-multiply">
+                            <div class="hidden w-full h-full items-center justify-center text-slate-300"><i data-lucide="award" class="w-12 h-12"></i></div>
+                        </div>
+                        <div class="text-center"><div class="font-bold text-slate-800">FSSAI Certified</div><div class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Food Safety</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-slate-900 text-slate-400 py-12 relative z-10 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 flex flex-col items-center text-center">
+                <div class="mb-6 p-3 bg-slate-800/50 rounded-full"><i data-lucide="droplets" class="w-8 h-8 text-cyan-500"></i></div>
+                <h2 class="text-2xl font-display font-bold text-white mb-2 tracking-tight">A1B2 QUALITY PRODUCTS</h2>
+                <p class="mb-8 text-cyan-500/80 font-medium">SPristine AQUA — Pure Hydration for Tiruppur</p>
+                <div class="flex flex-col sm:flex-row gap-6 mb-12 text-sm font-medium">
+                     <a href="tel:+918148038458" class="hover:text-white transition-colors flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> +91 81480 38458</a>
+                     <a href="tel:+919943955622" class="hover:text-white transition-colors flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> +91 99439 55622</a>
+                </div>
+                <div class="w-full h-px bg-gradient-to-r from-transparent via-slate-800 to-transparent mb-8"></div>
+                <div class="text-xs text-slate-600">© <span id="year"></span> A1B2 QUALITY PRODUCTS. All rights reserved.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Mobile Floating Cart Bar -->
+    <div id="mobile-cart-bar" class="fixed bottom-4 left-4 right-4 z-[80] bg-slate-900 text-white p-4 rounded-2xl shadow-2xl flex justify-between items-center transform translate-y-[150%] transition-transform duration-300 md:hidden border border-slate-700/50">
+        <div class="flex flex-col">
+            <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Total</span>
+            <div class="font-display font-bold text-lg flex items-center gap-2">
+                <span id="mobile-cart-count" class="bg-cyan-600 text-[10px] px-2 py-0.5 rounded-full">0</span>
+                <span id="mobile-cart-total">₹0</span>
+            </div>
+        </div>
+        <button onclick="openCart()" class="bg-cyan-500 hover:bg-cyan-400 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-cyan-500/20 transition-all active:scale-95 flex items-center gap-2">
+            View Cart <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+    </div>
+
+    <!-- Cart Sidebar (Non-blocking) -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-[60] w-full md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+        <!-- Header -->
+        <div class="px-6 py-6 bg-slate-900 text-white flex justify-between items-center shadow-lg relative z-10">
+            <div>
+                <h2 class="text-xl font-display font-bold flex items-center gap-2">Your Hydration Cart</h2>
+                <p class="text-xs text-slate-400 mt-1">Review your items before ordering</p>
+            </div>
+            <button onclick="toggleCart()" class="text-slate-400 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <!-- Items Area -->
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50">
+            <div class="h-full flex flex-col items-center justify-center text-slate-400 space-y-4">
+                <div class="bg-white p-6 rounded-full shadow-sm"><i data-lucide="shopping-basket" class="w-12 h-12 text-slate-300"></i></div>
+                <p class="font-medium">Your cart is currently empty.</p>
+                <button onclick="toggleCart()" class="text-sm text-cyan-600 font-bold hover:underline">Start Shopping</button>
+            </div>
+        </div>
+        <!-- Footer / Checkout -->
+        <div id="checkout-section" class="p-6 bg-white border-t border-slate-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] hidden">
+            <div class="space-y-4">
+                <div class="space-y-3">
+                    <div class="relative"><i data-lucide="user" class="absolute left-3 top-3.5 w-4 h-4 text-slate-400"></i><input type="text" id="cust-name" placeholder="Full Name" class="w-full pl-10 p-3 bg-slate-50 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all"></div>
+                    <div class="relative"><i data-lucide="phone" class="absolute left-3 top-3.5 w-4 h-4 text-slate-400"></i><input type="tel" id="cust-phone" placeholder="Mobile Number" class="w-full pl-10 p-3 bg-slate-50 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all"></div>
+                    <textarea id="cust-address" placeholder="Delivery Address (Tiruppur)" class="w-full p-3 bg-slate-50 rounded-lg border border-slate-200 text-sm h-20 resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all"></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-3 p-1 bg-slate-100 rounded-xl">
+                    <label class="cursor-pointer"><input type="radio" name="payment" value="Card/UPI" class="peer sr-only"><div class="py-2 text-center text-xs font-bold text-slate-500 rounded-lg peer-checked:bg-white peer-checked:text-cyan-700 peer-checked:shadow-sm transition-all flex items-center justify-center gap-2"><i data-lucide="credit-card" class="w-3 h-3"></i> Online</div></label>
+                    <label class="cursor-pointer"><input type="radio" name="payment" value="POD" checked class="peer sr-only"><div class="py-2 text-center text-xs font-bold text-slate-500 rounded-lg peer-checked:bg-white peer-checked:text-cyan-700 peer-checked:shadow-sm transition-all flex items-center justify-center gap-2"><i data-lucide="banknote" class="w-3 h-3"></i> Cash</div></label>
+                </div>
+                <div class="bg-blue-50/50 p-3 rounded-lg flex items-center justify-between text-xs text-blue-800 border border-blue-100">
+                    <span class="flex items-center gap-2"><i data-lucide="clock" class="w-3 h-3"></i> Est. Delivery:</span>
+                    <span id="delivery-time" class="font-bold">...</span>
+                </div>
+                <div class="flex justify-between items-end pt-2 border-t border-slate-100">
+                    <span class="text-sm text-slate-500 font-medium">Total Amount</span>
+                    <span id="cart-total" class="text-2xl font-display font-bold text-slate-900">₹0</span>
+                </div>
+                <button onclick="sendToWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-500/20 flex items-center justify-center gap-2 transition-all transform active:scale-98"><span>Place Order</span><i data-lucide="send" class="w-4 h-4"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Data ---
+        const products = [
+            { id: 1, name: "300ml Mini", price: 7, size: "300ml", image: "https://github.com/pavithranr2025e-png/imagea1b2/blob/main/300.png?raw=true" },
+            { id: 2, name: "750ml Standard", price: 9, size: "750ml", image: "https://github.com/pavithranr2025e-png/imagea1b2/blob/main/750.png?raw=true" },
+            { id: 3, name: "1 Litre Pure", price: 12, size: "1L", image: "https://github.com/pavithranr2025e-png/imagea1b2/blob/main/1.png?raw=true" },
+            { id: 4, name: "2 Litre Family", price: 15, size: "2L", image: "https://github.com/pavithranr2025e-png/imagea1b2/blob/main/2.png?raw=true" },
+            { id: 5, name: "5 Litre Can", price: 20, size: "5L", image: "https://github.com/pavithranr2025e-png/imagea1b2/blob/main/5.png?raw=true" },
+            { id: 6, name: "20L Jumbo Jar", price: 30, size: "20L", image: "https://github.com/pavithranr2025e-png/imagea1b2/blob/main/20.png?raw=true" }
+        ];
+
+        let cart = [];
+        let currentQuickItem = null;
+        const WHATSAPP_NUMBER = "918148038458";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9IyF1s-8TlvE4f1gaEDHWlfRwAXBafcMgv2e4w3RCqsue4850x63Jm_yTRPMJtxW-4A/exec"; 
+        let apiKey = localStorage.getItem('gemini_api_key') || ""; 
+
+        // --- Functions ---
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            // Check if sidebar is currently closed (has the translate class)
+            if (sidebar.classList.contains('translate-x-full')) {
+                openCart();
+            } else {
+                closeCart();
+            }
+        }
+
+        function openCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const mainContent = document.getElementById('main-content');
+            const nav = document.getElementById('main-nav');
+            const mobileCartBar = document.getElementById('mobile-cart-bar');
+            
+            sidebar.classList.remove('translate-x-full');
+            // Shift content left on desktop
+            mainContent.classList.add('md:pr-96');
+            nav.classList.add('md:pr-96');
+
+            // HIDE the mobile floating bar when cart opens
+            if (mobileCartBar) {
+                mobileCartBar.classList.add('translate-y-[150%]');
+            }
+        }
+
+        function closeCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const mainContent = document.getElementById('main-content');
+            const nav = document.getElementById('main-nav');
+            const mobileCartBar = document.getElementById('mobile-cart-bar');
+            
+            sidebar.classList.add('translate-x-full');
+            mainContent.classList.remove('md:pr-96');
+            nav.classList.remove('md:pr-96');
+
+            // SHOW the mobile floating bar again if cart has items
+            if (mobileCartBar && cart.length > 0) {
+                mobileCartBar.classList.remove('translate-y-[150%]');
+            }
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCartUI();
+            
+            const badge = document.getElementById('cart-badge');
+            if(badge) {
+                badge.classList.remove('scale-0');
+                badge.classList.add('scale-125');
+                setTimeout(() => badge.classList.remove('scale-125'), 200);
+            }
+
+            // Automatically open sidebar if closed (Desktop only)
+            const sidebar = document.getElementById('cart-sidebar');
+            if (window.innerWidth >= 768 && sidebar.classList.contains('translate-x-full')) {
+                openCart();
+            }
+        }
+
+        function updateQty(id, change) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += change;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+                updateCartUI();
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            const badge = document.getElementById('cart-badge');
+            const checkoutSection = document.getElementById('checkout-section');
+            const totalEl = document.getElementById('cart-total');
+            const mobileCartBar = document.getElementById('mobile-cart-bar');
+            const mobileCartCount = document.getElementById('mobile-cart-count');
+            const mobileCartTotal = document.getElementById('mobile-cart-total');
+            const sidebar = document.getElementById('cart-sidebar');
+
+            const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+            const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+            // Logic for Mobile Bar Visibility
+            if (cart.length === 0) {
+                 // If empty, ensure sidebar is closed and bar is hidden
+                 closeCart();
+                 if(mobileCartBar) mobileCartBar.classList.add('translate-y-[150%]'); 
+            } else {
+                 // If items exist, update text
+                 if(mobileCartCount) mobileCartCount.textContent = totalQty;
+                 if(mobileCartTotal) mobileCartTotal.textContent = `₹${total}`;
+                 
+                 // Only show the bar if the sidebar is CURRENTLY CLOSED
+                 if(mobileCartBar) {
+                    if (sidebar.classList.contains('translate-x-full')) {
+                        mobileCartBar.classList.remove('translate-y-[150%]');
+                    } else {
+                        // Keep it hidden if sidebar is open
+                        mobileCartBar.classList.add('translate-y-[150%]');
+                    }
+                 }
+            }
+
+            // Update Desktop Badge
+            if(badge) {
+                badge.textContent = totalQty;
+                if (totalQty === 0) {
+                    badge.classList.add('scale-0', 'hidden');
+                } else {
+                    badge.classList.remove('hidden', 'scale-0');
+                }
+            }
+
+            // Render Cart Items
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-slate-400 space-y-4">
+                        <div class="bg-white p-6 rounded-full shadow-sm">
+                            <i data-lucide="shopping-basket" class="w-12 h-12 text-slate-300"></i>
+                        </div>
+                        <p class="font-medium">Your cart is currently empty.</p>
+                        <button onclick="toggleCart()" class="text-sm text-cyan-600 font-bold hover:underline">Start Shopping</button>
+                    </div>`;
+                checkoutSection.classList.add('hidden');
+            } else {
+                checkoutSection.classList.remove('hidden');
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center bg-white p-4 rounded-2xl border border-slate-100 shadow-sm relative group">
+                        <div class="h-16 w-16 bg-slate-50 rounded-xl flex items-center justify-center mr-4 shrink-0">
+                            <img src="${item.image}" class="h-12 w-auto object-contain">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-slate-900 text-sm truncate">${item.name}</h4>
+                            <div class="text-xs text-slate-500 font-medium">${item.size} • <span class="text-cyan-600">₹${item.price}</span></div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-slate-50 rounded-lg p-1">
+                            <button onclick="updateQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm hover:text-cyan-600">-</button>
+                            <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+                            <button onclick="updateQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm hover:text-cyan-600">+</button>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="absolute -top-2 -right-2 bg-red-50 text-red-500 rounded-full p-1 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500 hover:text-white"><i data-lucide="x" class="w-3 h-3"></i></button>
+                    </div>
+                `).join('');
+            }
+
+            if(totalEl) totalEl.textContent = `₹${total}`;
+            if(window.lucide) lucide.createIcons();
+        }
+
+        // --- Quick Buy Functions ---
+        function openQuickBuy(id) {
+            currentQuickItem = products.find(p => p.id === id);
+            document.getElementById('quick-buy-item').textContent = `${currentQuickItem.name} — ₹${currentQuickItem.price}`;
+            document.getElementById('quick-buy-modal').classList.remove('hidden');
+        }
+
+        function closeQuickBuy() {
+            document.getElementById('quick-buy-modal').classList.add('hidden');
+        }
+
+        function confirmQuickBuy() {
+            const name = document.getElementById('quick-name').value;
+            const phone = document.getElementById('quick-phone').value;
+            
+            if(!name || !phone) return alert("Please enter Name and Phone.");
+
+            const message = `*QUICK ORDER - SPristine AQUA*\n----------------------\n*Customer:* ${name}\n*Phone:* ${phone}\n*Item:* ${currentQuickItem.name} (${currentQuickItem.size})\n*Price:* ₹${currentQuickItem.price}\n----------------------\n*Type:* Instant Order ⚡`;
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            
+            logToSheets({
+                date: new Date().toLocaleDateString(),
+                name: name,
+                phone: phone,
+                items: `${currentQuickItem.name} (${currentQuickItem.size})`,
+                total: `₹${currentQuickItem.price}`,
+                payment: "Discuss",
+                address: "Ask on WhatsApp"
+            });
+
+            window.open(url, '_blank');
+            closeQuickBuy();
+        }
+
+        function sendToWhatsApp() {
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const address = document.getElementById('cust-address').value;
+            const payment = document.querySelector('input[name="payment"]:checked').value;
+            const delivery = document.getElementById('delivery-time').textContent;
+
+            if (cart.length === 0) return alert("Cart is empty!");
+            if (!name || !phone) return alert("Please fill in Name and Phone.");
+
+            let message = `*NEW ORDER - SPristine AQUA*\n`;
+            message += `----------------------------\n`;
+            message += `*Customer:* ${name}\n`;
+            message += `*Phone:* ${phone}\n`;
+            message += `*Location:* ${address || "Tiruppur - 641652"}\n`;
+            message += `*Payment:* ${payment}\n`;
+            message += `*Req Delivery:* ${delivery}\n`;
+            message += `----------------------------\n`;
+            message += `*Items:*\n`;
+            cart.forEach(item => {
+                message += `- ${item.name} (${item.size}): ${item.qty} x ₹${item.price} = ₹${item.qty * item.price}\n`;
+            });
+            message += `----------------------------\n`;
+            message += `*TOTAL AMOUNT: ${document.getElementById('cart-total').textContent}*\n`;
+
+            logToSheets({
+                date: new Date().toLocaleDateString(),
+                name: name,
+                phone: phone,
+                items: cart.map(i => `${i.size}(${i.qty})`).join(', '),
+                total: document.getElementById('cart-total').textContent,
+                payment: payment,
+                address: address
+            });
+
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function logToSheets(data) {
+            if (!GOOGLE_SCRIPT_URL) {
+                console.log("Google Sheet URL missing. Data:", data);
+                return;
+            }
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors", 
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(() => console.log("Sent to Sheets"))
+            .catch(e => console.error("Sheet Error", e));
+        }
+
+        // --- Simulated AI Logic (No Key Required) ---
+        async function calculateHydration() {
+            const weight = document.getElementById('ai-weight').value;
+            const activity = document.getElementById('ai-activity').value;
+            const resultDiv = document.getElementById('ai-result');
+            const loadingDiv = document.getElementById('ai-loading');
+
+            if (!weight) {
+                alert("Please enter your weight.");
+                return;
+            }
+
+            loadingDiv.classList.remove('hidden');
+
+            setTimeout(() => {
+                const baseIntake = weight * 0.033;
+                let finalIntake = baseIntake;
+                if(activity === 'moderate') finalIntake += 0.5;
+                if(activity === 'active') finalIntake += 1.0;
+                if(activity === 'athlete') finalIntake += 1.5;
+
+                const liters = finalIntake.toFixed(1);
+                
+                let recommendation = "1L Pure Bottle (Carry with you)";
+                if (liters > 3.5) recommendation = "5L Can (Perfect for high intake)";
+                
+                const responseText = `
+                    1. <b>Daily Target:</b> You need about ${liters} Liters per day.<br>
+                    2. <b>Best Fit:</b> Try our ${recommendation}.<br>
+                    3. <b>Quick Tip:</b> Drink a glass 30 mins before meals for better digestion.<br>
+                    4. <b>Why SPristine:</b> Our pH-balanced water ensures optimal hydration for your active lifestyle.
+                `;
+
+                resultDiv.innerHTML = responseText;
+                loadingDiv.classList.add('hidden');
+            }, 1500); 
+        }
+
+        async function calculateEventNeeds() {
+            const guests = document.getElementById('event-guests').value;
+            const duration = document.getElementById('event-duration').value;
+            const setting = document.getElementById('event-setting').value;
+            const resultDiv = document.getElementById('event-result');
+            const loadingDiv = document.getElementById('event-loading');
+
+            if (!guests) {
+                alert("Please enter guest count.");
+                return;
+            }
+
+            loadingDiv.classList.remove('hidden');
+
+            setTimeout(() => {
+                let factor = 0.5;
+                if (setting === 'Outdoor') factor = 0.7;
+                
+                const totalLiters = Math.ceil(guests * duration * factor);
+                const jarsNeeded = Math.ceil(totalLiters / 20);
+                const cost = jarsNeeded * 30; 
+
+                const responseText = `
+                    1. <b>Total Water:</b> Approx ${totalLiters} Liters needed.<br>
+                    2. <b>Suggested Order:</b> ${jarsNeeded} x 20L Jumbo Jars.<br>
+                    3. <b>Est. Cost:</b> ₹${cost} (excluding dispenser rental).<br>
+                    4. <b>Why SPristine:</b> Bulk orders are delivered fresh within 12 hours, ensuring your guests stay refreshed.
+                `;
+
+                resultDiv.innerHTML = responseText;
+                loadingDiv.classList.add('hidden');
+            }, 1500);
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearEl = document.getElementById('year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+            
+            const productsContainer = document.getElementById('products-container');
+            if (productsContainer) {
+                productsContainer.innerHTML = ''; 
+                products.forEach(p => {
+                    const el = document.createElement('div');
+                    el.className = "group bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 border border-slate-100 flex flex-col overflow-hidden relative";
+                    el.innerHTML = `
+                        <div class="relative h-72 bg-gradient-to-b from-slate-50 to-white flex items-center justify-center p-6 group-hover:bg-cyan-50/30 transition-colors duration-500">
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-100/40 via-transparent to-transparent"></div>
+                            <img src="${p.image}" alt="${p.name}" class="h-full w-auto object-contain transform group-hover:scale-110 transition-transform duration-500 drop-shadow-xl z-10" loading="lazy">
+                        </div>
+                        
+                        <div class="p-6 flex-1 flex flex-col relative z-20 bg-white">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="text-lg font-bold text-slate-900 leading-tight">${p.name}</h4>
+                                    <p class="text-xs text-slate-400 mt-1 font-medium">Perfectly Balanced pH</p>
+                                </div>
+                                <span class="bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-1 rounded-md border border-slate-200 uppercase tracking-wide">${p.size}</span>
+                            </div>
+                            
+                            <div class="mt-auto flex items-center justify-between gap-3 pt-4 border-t border-slate-50">
+                                <span class="font-display text-2xl font-bold text-slate-900">₹${p.price}</span>
+                                <div class="flex gap-2">
+                                    <button onclick="openQuickBuy(${p.id})" class="h-10 w-10 rounded-xl bg-green-50 text-green-600 hover:bg-green-500 hover:text-white border border-green-100 hover:border-green-500 transition-all flex items-center justify-center group/btn" title="Quick Order">
+                                        <i data-lucide="zap" class="w-5 h-5 fill-current transition-transform group-hover/btn:scale-110"></i>
+                                    </button>
+                                    <button onclick="addToCart(${p.id})" class="h-10 px-4 rounded-xl bg-slate-900 text-white hover:bg-cyan-600 transition-all flex items-center gap-2 text-sm font-bold shadow-lg shadow-slate-200">
+                                        Add <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    productsContainer.appendChild(el);
+                });
+            }
+
+            const now = new Date();
+            now.setHours(now.getHours() + 12);
+            const deliveryEl = document.getElementById('delivery-time');
+            if (deliveryEl) {
+                deliveryEl.textContent = now.toLocaleDateString('en-IN', { 
+                    weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' 
+                });
+            }
+
+            if (window.lucide) lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
